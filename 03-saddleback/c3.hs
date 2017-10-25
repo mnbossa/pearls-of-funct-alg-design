@@ -109,16 +109,16 @@ check = do
 -- Benchmarking ---------------------------------------
 main :: IO()
 main = defaultMain [
-  bgroup "specification" 
-      [bench ("f"++(show i)) $ whnf (invert     (fs!!i)) z | i<-[0..length fs-1]]
-  ,bgroup "diagonal" 
-      [bench ("f"++(show i)) $ whnf (invert'    (fs!!i)) z | i<-[0..length fs-1]]
-  ,bgroup "saddleback1" 
-      [bench ("f"++(show i)) $ whnf (invert''   (fs!!i)) z | i<-[0..length fs-1]]
+--  bgroup "specification" 
+--      [bench ("f"++(show i)) $ nf (invert     (fs!!i)) z | i<-[0..length fs-1]]
+--  ,bgroup "diagonal" 
+--      [bench ("f"++(show i)) $ nf (invert'    (fs!!i)) z | i<-[0..length fs-1]]
+  bgroup "saddleback1" 
+      [bench ("f"++(show i)) $ nf (invert''   (fs!!i)) z | i<-[0..length fs-1]]
   ,bgroup "saddleback2" 
-      [bench ("f"++(show i)) $ whnf (invert'''  (fs!!i)) z | i<-[0..length fs-1]]
+      [bench ("f"++(show i)) $ nf (invert'''  (fs!!i)) z | i<-[0..length fs-1]]
   ,bgroup "div and conq" 
-      [bench ("f"++(show i)) $ whnf (invert'''' (fs!!i)) z | i<-[0..length fs-1]]
+      [bench ("f"++(show i)) $ nf (invert'''' (fs!!i)) z | i<-[0..length fs-1]]
  ]
   where
     z = 1000
